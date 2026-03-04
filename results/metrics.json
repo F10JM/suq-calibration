@@ -1,0 +1,36 @@
+{
+  "config": {
+    "generator_model": "Qwen/Qwen2.5-7B-Instruct",
+    "evaluator_model": "Qwen/Qwen2.5-72B-Instruct",
+    "dataset": "trivia_qa",
+    "dataset_split": "validation",
+    "num_queries": 300,
+    "seed": 42,
+    "num_samples": 10,
+    "temperature": 1.0,
+    "max_new_tokens": 128,
+    "similarity_methods": [
+      "rouge_l"
+    ],
+    "num_bins": 10,
+    "num_bootstrap": 1000,
+    "output_dir": "./results",
+    "generation_cache": "./results/generations.jsonl",
+    "similarity_cache_dir": "./results",
+    "api_max_retries": 5,
+    "api_retry_delay": 2.0,
+    "api_concurrent_requests": 4
+  },
+  "results": {
+    "rouge_l": {
+      "avg_subjective_utility": 0.6527078740995411,
+      "avg_observed_utility": 0.5012802567802569,
+      "ece": 0.16792180273355933,
+      "ece_ci": [
+        0.14147458313830308,
+        0.22291408754761896
+      ],
+      "num_queries": 300
+    }
+  }
+}

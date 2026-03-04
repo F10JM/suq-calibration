@@ -1,0 +1,15 @@
+# Environment
+.env
+__pycache__/
+*.pyc
+
+# Results — ignore large JSONL caches but keep plots and metrics
+results/*.jsonl
+results_test/
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

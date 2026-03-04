@@ -1,0 +1,9 @@
+huggingface_hub>=0.23
+datasets>=2.19
+numpy>=1.24
+matplotlib>=3.7
+scipy>=1.10
+tqdm
+pyyaml
+python-dotenv
+rouge-score

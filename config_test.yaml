@@ -1,0 +1,26 @@
+# Test config with num_queries=3 for validation
+generator_model: "Qwen/Qwen2.5-7B-Instruct"
+evaluator_model: "Qwen/Qwen2.5-72B-Instruct"
+
+dataset: "trivia_qa"
+dataset_split: "validation"
+num_queries: 3
+seed: 42
+
+num_samples: 10
+temperature: 1.0
+max_new_tokens: 128
+
+similarity_methods:
+  - "rouge_l"
+
+num_bins: 10
+num_bootstrap: 1000
+
+output_dir: "./results_test"
+generation_cache: "./results_test/generations.jsonl"
+similarity_cache_dir: "./results_test"
+
+api_max_retries: 5
+api_retry_delay: 2.0
+api_concurrent_requests: 4
