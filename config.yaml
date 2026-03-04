@@ -1,10 +1,11 @@
-# --- API ---
-# HF_TOKEN is read from environment variable or .env file, NOT stored here.
-# The HF Inference API is used for both generation and evaluation.
+# --- Backend ---
+# "api" = HF Inference API (requires HF_TOKEN and API credits)
+# "local" = local transformers models on GPU (requires torch + transformers + VRAM)
+backend: "local"
 
 # --- Models ---
 generator_model: "Qwen/Qwen2.5-7B-Instruct"
-evaluator_model: "Qwen/Qwen2.5-72B-Instruct"
+evaluator_model: "Qwen/Qwen2.5-7B-Instruct"
 
 # --- Dataset ---
 dataset: "trivia_qa"
@@ -34,4 +35,4 @@ similarity_cache_dir: "./results"
 # --- API settings ---
 api_max_retries: 5
 api_retry_delay: 2.0
-api_concurrent_requests: 4
+api_concurrent_requests: 1

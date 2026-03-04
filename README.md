@@ -78,7 +78,7 @@ git clone <repo-url> && cd suq-calibration
 pip install -r requirements.txt
 ```
 
-No PyTorch or Transformers needed -- all inference runs through the HF Inference API.
+For the default **local backend**, PyTorch and Transformers are included in requirements. For the **API backend** only, these are optional.
 
 ### Environment Setup
 
@@ -92,6 +92,34 @@ You can also set `HF_TOKEN` as an environment variable directly:
 
 ```bash
 export HF_TOKEN=hf_your_actual_token
+```
+
+## Backend
+
+The project supports two inference backends, configured via `backend` in `config.yaml`:
+
+### Local Backend (`backend: "local"`)
+
+Runs models locally using `transformers` on GPU (float16, `device_map="auto"`). No API token or credits needed. Models are downloaded from HuggingFace Hub on first use and cached.
+
+**Requirements**: NVIDIA GPU with sufficient VRAM. `Qwen/Qwen2.5-7B-Instruct` fits in ~16GB. Set `api_concurrent_requests: 1` to avoid GPU contention.
+
+```yaml
+backend: "local"
+generator_model: "Qwen/Qwen2.5-7B-Instruct"
+evaluator_model: "Qwen/Qwen2.5-7B-Instruct"
+api_concurrent_requests: 1
+```
+
+### API Backend (`backend: "api"`)
+
+Uses the HuggingFace Inference API. Requires `HF_TOKEN` and API credits. Supports larger evaluator models (e.g., 72B) that may not fit locally.
+
+```yaml
+backend: "api"
+generator_model: "Qwen/Qwen2.5-7B-Instruct"
+evaluator_model: "Qwen/Qwen2.5-72B-Instruct"
+api_concurrent_requests: 4
 ```
 
 ## Usage
@@ -247,6 +275,7 @@ All parameters are set in `config.yaml`:
 
 | Parameter | Default | Description |
 |-----------|---------|-------------|
+| `backend` | `"local"` | Inference backend: `"local"` (GPU via transformers) or `"api"` (HF Inference API). |
 | `generator_model` | `"Qwen/Qwen2.5-7B-Instruct"` | HF model for generating responses. Smaller models are cheaper and faster. |
 | `evaluator_model` | `"Qwen/Qwen2.5-72B-Instruct"` | HF model for LLM-judge similarity. Larger models give more reliable judgments. |
 | `dataset` | `"trivia_qa"` | Dataset to use. Supports `"trivia_qa"` and `"coqa"`. |

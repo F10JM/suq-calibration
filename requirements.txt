@@ -7,3 +7,5 @@ tqdm
 pyyaml
 python-dotenv
 rouge-score
+torch>=2.0
+transformers>=4.38
