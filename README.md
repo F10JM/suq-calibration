@@ -18,7 +18,6 @@ suq-calibration/
 ├── .gitignore
 ├── requirements.txt
 ├── README.md
-├── CLAUDE_CODE_PLAN.md          # Original build specification
 ├── src/
 │   ├── __init__.py
 │   ├── utils.py                 # Config loading, caching, logging, seeding
